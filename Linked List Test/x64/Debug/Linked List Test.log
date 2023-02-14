@@ -1,0 +1,16 @@
+﻿  linkedList.cpp
+C:\Users\zele0397\source\repos\Node.h(11,26): error C3861: 'nextptr': identifier not found
+C:\Users\zele0397\source\repos\Node.h(20): message : see reference to class template instantiation 'Node<ItemType>' being compiled
+C:\Users\zele0397\source\repos\linkedList.cpp(9,32): error C2514: 'Node': class template cannot be constructed
+C:\Users\zele0397\source\repos\Node.h(5): message : see declaration of 'Node'
+C:\Users\zele0397\source\repos\linkedList.cpp(10,34): error C2514: 'Node': class template cannot be constructed
+C:\Users\zele0397\source\repos\Node.h(5): message : see declaration of 'Node'
+C:\Users\zele0397\source\repos\linkedList.cpp(11,33): error C2514: 'Node': class template cannot be constructed
+C:\Users\zele0397\source\repos\Node.h(5): message : see declaration of 'Node'
+C:\Users\zele0397\source\repos\linkedList.cpp(24,8): error C2065: 'root': undeclared identifier
+C:\Users\zele0397\source\repos\linkedList.cpp(25,12): error C2248: 'Node<int>::next': cannot access private member declared in class 'Node<int>'
+C:\Users\zele0397\source\repos\Node.h(8): message : see declaration of 'Node<int>::next'
+C:\Users\zele0397\source\repos\linkedList.cpp(6): message : see declaration of 'Node<int>'
+C:\Users\zele0397\source\repos\linkedList.cpp(27,12): error C2248: 'Node<int>::next': cannot access private member declared in class 'Node<int>'
+C:\Users\zele0397\source\repos\Node.h(8): message : see declaration of 'Node<int>::next'
+C:\Users\zele0397\source\repos\linkedList.cpp(6): message : see declaration of 'Node<int>'
