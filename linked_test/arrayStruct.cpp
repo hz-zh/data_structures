@@ -4,25 +4,19 @@
 using namespace std;
 
 
-void printArray(int row, int col);
+void printArray(int row, int col, Node<int>* array);
 
 int main() {
-   Node<int>* root = new Node<int>(0, 0, 0);
-   Node<int>* second = new Node<int>(0, 1, 1);
-   Node<int>* third = new Node<int>(0, 2, 2);
-	
+	Node<int>* array1 = new Node<int>();
 
 
    return 0;
 };
-/*
-void printArray(int row, int col) {
-   Node<int>* root = new Node<int>(0, 0, 0);
 
+void printArray(int row, int col, Node<int>* array) {
    for( int i = 0; i <= row; i++ ) {
       for( int j = 0; j <= col; j++ ) {
-         cout << 
+         cout << array->getValAtIndex(i, j) << endl;
       }
    }
 };
-*/
