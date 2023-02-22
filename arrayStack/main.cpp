@@ -11,5 +11,5 @@ int main() {
 	sta.push(6);
 
 	// if stack is not empty, peek
-	if (!sta.isEmpty()) std::cout << "peeked value: " << sta.peek() << endl;
+	if (!sta.isEmpty()) std::cout << "peeked value: " << sta.peek() << std::endl;
 };
