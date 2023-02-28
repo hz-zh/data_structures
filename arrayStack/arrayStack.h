@@ -15,8 +15,10 @@ public:
 	bool isEmpty() const;
 	bool push(const T& newEntry);
 	bool pop();
-	T peek();
+	T peek() const;
+	void printStack();
+	~arrayStack();
 };
 
-#include "arrayStack.h"
+#include "arrayStack.cpp"
 #endif 
