@@ -14,8 +14,7 @@ arrayStack<T>::arrayStack() : TOS(-1) {
 
 template<class T>
 bool arrayStack<T>::isEmpty() const {
-	if (TOS < 0) return true;
-	else return false;
+	return TOS < 0;
 };
 
 template<class T>

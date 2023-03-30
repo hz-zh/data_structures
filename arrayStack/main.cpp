@@ -26,6 +26,7 @@ int main(){
     
 	//print stack -- stack will be empty after printing
 	sta.printStack();
+	
 
 
 	//sta.push(1);

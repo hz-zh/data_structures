@@ -19,11 +19,13 @@ int main(){
     //myList.remove(3);
     //myList.printList();
     myList.replace(3,70);
-    //myList.printList();
+    myList.printList();
     myList.insert(myList.getLength(),50);
     myList.insert(myList.getLength(),60);
-    myList.insert(2,60);
     myList.printList();
-	system("pause");
+    myList.replace(2,60);
+    myList.printList();
+	myList.clear();
+    myList.printList();
     return 0;
 }
