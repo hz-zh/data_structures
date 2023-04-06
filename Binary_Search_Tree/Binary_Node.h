@@ -20,7 +20,14 @@ public:
 	void setRightNode(Binary_Node<ItemType>*);
 	ItemType getNodeValue() const;
 	void setNodeValue(ItemType);
+	bool isLeaf() const;
 };
+
+template<class ItemType>
+bool Binary_Node<ItemType>::isLeaf() const {
+	return ((leftChildPtr == nullptr) && (rightChildPtr == nullptr));
+};
+
 
 template<class ItemType>
 Binary_Node<ItemType>* Binary_Node<ItemType>::getLeftNode() const {
