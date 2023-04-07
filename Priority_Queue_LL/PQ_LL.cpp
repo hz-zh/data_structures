@@ -2,19 +2,20 @@
 #define PQ_LL_IMP
 
 #include <iostream>
+#include <cstddef>
 
 template <class T>
 PQ_LL<T>::PQ_LL()
 {
-    itemCount = 0;
-    root = nullptr;
-    bud = nullptr;
+    dummy = NULL;
+    root = &dummy;
+    bud = &dummy;
 }
 
 template <class T>
 bool PQ_LL<T>::isEmpty() const
 {
-    return root == nullptr;
+    return root == &dummy;
 }
 
 template <class T>
@@ -23,7 +24,8 @@ bool PQ_LL<T>::enqueue(const T& newEntry)
     if(isEmpty())
     {
         root = new Node<T>(newEntry);
-        bud = root;
+        dummy.setNextNode(root);
+		  bud = root;
         itemCount++;
         return true;
     }
@@ -31,6 +33,7 @@ bool PQ_LL<T>::enqueue(const T& newEntry)
     if(newEntry < root->getNodeValue())
     {
         root = new Node<T>(newEntry, root);
+		  dummy.setNextNode(root);
         itemCount++;
         return true;
     }
@@ -39,8 +42,7 @@ bool PQ_LL<T>::enqueue(const T& newEntry)
     {
         if(curr->getNodeValue() <= newEntry && curr->getNextNode()->getNodeValue() >= newEntry)
         {
-            Node<T>* temp = new Node<T>(newEntry, curr->getNextNode());
-            curr->setNextNode(temp);
+            curr->setNextNode(new Node<T>(newEntry, curr->getNextNode()));
             itemCount++; 
             return true;  
         }
@@ -59,10 +61,15 @@ bool PQ_LL<T>::dequeue()
         std::cout << "Cannot dequeue, the queue is empty." << std::endl;
         return false;
     }
-
-    root = root->getNextNode();
-    itemCount--;
-    return true;
+	Node<T>* cur = root;
+	while (cur->getNextNode()->getNextNode() != nullptr) {
+		//std::cout << cur->getNodeValue() << " ";
+		cur = cur->getNextNode();
+	}
+	bud = cur;
+	bud->setNextNode(nullptr);
+   itemCount--;
+   return true;
 }
 
 template <class T>
@@ -70,7 +77,7 @@ T PQ_LL<T>::peek() const
 {
     if(!isEmpty())
     {
-        return root->getNodeValue();
+        return bud->getNodeValue();
     }
     return 0;
 }

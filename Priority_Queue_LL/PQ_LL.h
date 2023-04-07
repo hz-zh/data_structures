@@ -10,6 +10,7 @@ class PQ_LL : public PriorityQueueInterface<T> {
 private:
 	Node<T>* root;
 	Node<T>* bud;
+	Node<T> dummy;
 	int itemCount;
 public:
 	PQ_LL();
