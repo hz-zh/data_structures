@@ -1,6 +1,9 @@
 #ifndef _Node_Class
 #define _Node_Class
 
+// include library with nullptr 
+#include <cstddef>
+
 template<class ItemType>
 class Node {
 private:
@@ -8,8 +11,8 @@ private:
 	Node* next;
 public:
 	// constructors using initializers
-	Node() : value(0), next(0) {};				// new Node
-	Node(ItemType val) : value(val), next(0) {};		// new Node(10)
+	Node() : value(0), next(nullptr) {};				// new Node
+	Node(ItemType val) : value(val), next(nullptr) {};		// new Node(10)
 	Node(ItemType val, Node* n) : value(val), next(n) {};		// new Node(10, ptr)
 
 	// class methods

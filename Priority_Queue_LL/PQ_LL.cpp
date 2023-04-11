@@ -1,69 +1,95 @@
 #ifndef PQ_LL_IMP
 #define PQ_LL_IMP
 
-using namespace std;
-#include "PQ_LL.h"
+#include <iostream>
+#include <cstddef>
 
-template<class ItemType>
-PQ_LL<ItemType>::PQ_LL() : {
-	root = NULL;
-	cout << "created queue object..." << endl;
+template <class T>
+PQ_LL<T>::PQ_LL()
+{
+    dummy = NULL;
+    root = &dummy;
+    bud = &dummy;
 }
 
-template<class ItemType>
-bool PQ_LL<ItemType>::isEmpty() const {
-
+template <class T>
+bool PQ_LL<T>::isEmpty() const
+{
+    return root == &dummy;
 }
 
-template<class ItemType>
-bool PQ_LL<ItemType>::enqueue(const ItemType& newEntry) {
-	Node<ItemType>* current = root;
+template <class T>
+bool PQ_LL<T>::enqueue(const T& newEntry)
+{
+    if(isEmpty())
+    {
+        root = new Node<T>(newEntry);
+        dummy.setNextNode(root);
+		  bud = root;
+        itemCount++;
+        return true;
+    }
 
-	if (!isEmpty()) {
-		// add as first node
-		if (newEntry < current->getNodeValue()) {
-			Node<ItemType>* temp = new Node<ItemType>(newEntry, root);
-			root = temp;
-			return true;
-		}
-		// priority higher than root
-		// insert at position
-		else {
-			while (current->getNextNode() != NULL) {
-				if (newEntry >= current->getNodeValue() && newEntry <= current->getNextNode()->getNodeValue()) {
-					Node<ItemType>* temp = new Node<ItemType>(newEntry, current->getNextNode());
-					current->setNextNode(temp);
-					return true;
-				}
-				else {
-					current = current->getNextNode();
-				}
-			}
-			Node<ItemType>* temp = new Node<ItemType>(newEntry);
-			current->setNextNode(temp);
-			current = current->getNextNode();
-			bud = current;
-			return true;
-		}
+    if(newEntry < root->getNodeValue())
+    {
+        root = new Node<T>(newEntry, root);
+		  dummy.setNextNode(root);
+        itemCount++;
+        return true;
+    }
+
+    for(Node<T>* curr = root; curr->getNextNode() != nullptr; curr = curr->getNextNode())
+    {
+        if(curr->getNodeValue() <= newEntry && curr->getNextNode()->getNodeValue() >= newEntry)
+        {
+            curr->setNextNode(new Node<T>(newEntry, curr->getNextNode()));
+            itemCount++; 
+            return true;  
+        }
+    }
+    bud->setNextNode(new Node<T>(newEntry));
+    bud = bud->getNextNode();
+    itemCount++;
+    return true;
+}
+
+template <class T>
+bool PQ_LL<T>::dequeue()
+{
+    if(isEmpty())
+    {
+        std::cout << "Cannot dequeue, the queue is empty." << std::endl;
+        return false;
+    }
+	Node<T>* cur = root;
+	while (cur->getNextNode()->getNextNode() != nullptr) {
+		//std::cout << cur->getNodeValue() << " ";
+		cur = cur->getNextNode();
 	}
-}
-template<class ItemType>
-bool PQ_LL<ItemType>::dequeue() {
-
-}
-template<class ItemType>
-ItemType PQ_LL<ItemType>::peek() const {
-
+	bud = cur;
+	bud->setNextNode(nullptr);
+   itemCount--;
+   return true;
 }
 
-template<class ItemType>
-void PQ_LL<ItemType>::printQueue() const {
-
+template <class T>
+T PQ_LL<T>::peek() const
+{
+    if(!isEmpty())
+    {
+        return bud->getNodeValue();
+    }
+    return 0;
 }
 
-template<class ItemType>
-PQ_LL<ItemType>::~PQ_LL() {
-	cout << "Deleting queue..." << endl;
+template <class T>
+void PQ_LL<T>::printQueue() const
+{
+    for(Node<T>* temp = root; temp != nullptr; temp = temp->getNextNode())
+    {
+        std::cout << temp->getNodeValue() << " ";
+    }
+    std::cout << std::endl;
 }
 
 #endif

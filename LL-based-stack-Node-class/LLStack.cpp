@@ -50,7 +50,7 @@ ItemType LLStack<ItemType>::peek() const {
 	if (!isEmpty()) {
 		return root->getNodeValue();
 	}
-	return -1;
+	return ItemType(0);
 }
 
 template <class ItemType>

@@ -64,7 +64,10 @@ bool ArrayList<ItemType>::remove(int position) {
 
 template <class ItemType>
 void ArrayList<ItemType>::clear() {
-
+	for (int i = 0; i < getLength()+1; i++) {
+		items[i] = 0;
+	}
+	itemCount = 0;
 };
 
 template <class ItemType>
@@ -82,4 +85,5 @@ void ArrayList<ItemType>::printList() const {
 	for (int i = 0; i < itemCount; i++) {
 		cout << "Item " << i << ": " << items[i] << endl;
 	}
+	cout << endl;
 };

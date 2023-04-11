@@ -5,19 +5,20 @@
 #include "Node.h"
 
 
-template<class ItemType>
-class PQ_LL : public PriorityQueueInterface<ItemType> {
+template<class T>
+class PQ_LL : public PriorityQueueInterface<T> {
 private:
-	Node<ItemType>* root;
-	Node<ItemType>* bud;
+	Node<T>* root;
+	Node<T>* bud;
+	Node<T> dummy;
+	int itemCount;
 public:
 	PQ_LL();
 	bool isEmpty() const;
-	bool enqueue(const ItemType& newEntry);
+	bool enqueue(const T& newEntry);
 	bool dequeue();
-	ItemType peek() const;
+	T peek() const;
 	void printQueue() const;
-	~PQ_LL();
 };
 #include "PQ_LL.cpp"
 #endif
