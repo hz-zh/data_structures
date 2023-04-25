@@ -1,4 +1,6 @@
 #include <iostream>
+// include library for auto keyword
+#include <type_traits>
 using namespace std;
 
 template <class V>
@@ -14,8 +16,9 @@ public:
 	
 	BinaryNode(const V& nValue, BinaryNode<V> *L, BinaryNode<V> *R): nodeValue(nValue), leftChildPtr(L), rightChildPtr(R){}
 	
-	void setValue(const V& newValue) { 
+	void setValue(const V& newValue) {
     nodeValue = newValue;
+	 std::cout << "setValue called" << std::endl;
   	}
 	
 	V getValue() const { 
@@ -34,11 +37,11 @@ public:
 		rightChildPtr = R;
 	}
 
-	auto getLeftChildPtr() const{
+	BinaryNode<V> * getLeftChildPtr() const{
 		return leftChildPtr;
 	}
 
-	auto getRightChildPtr() const{
+	BinaryNode<V> * getRightChildPtr() const{
 		return rightChildPtr;
 	}
 };

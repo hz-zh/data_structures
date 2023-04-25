@@ -2,6 +2,8 @@
 #define BINARY_TREE
 
 #include <iostream>
+// include library for nullptr
+#include <cstddef>
 #include "BinaryNode.h"
 
 class BinaryTree {
@@ -27,7 +29,9 @@ bool BinaryTree::isEmpty(BinaryNode<int>* rt) {
 }
 
 bool BinaryTree::add(int newEntry) {
+	//if (root != nullptr) 
 	return _add(root, newEntry);
+	//else return false;
 }
 
 
@@ -38,29 +42,32 @@ bool BinaryTree::_add(BinaryNode<int>* rt, int newEntry) {
 	//			else there is a left node: cur = cur->getLeftChildPtr()
 	//		else the value is greater than cur and there is no right node, put at right
 	//			else there is a right node: cur = cur->getRightChildPtr()
-
-	if (!isEmpty(getRoot())) {
-		root->setValue(newEntry);
+	std::cout << "entering _add" << std::endl;
+	if (root == nullptr) {
+		std::cout << "root == nullptr" << std::endl;
+		root = new BinaryNode<int>(newEntry);
 		return true;
 	}
-	else if (newEntry < rt->getValue()) {
-		if (!isEmpty(rt->getLeftChildPtr())) {
+	
+	if (newEntry < rt->getValue()) {
+		if (isEmpty(rt->getLeftChildPtr())) {
 			rt->setLeftChildPtr(new BinaryNode<int>(newEntry));
-			return true;
+			//return true;
 		}
 		else {
 			_add(rt->getLeftChildPtr(), newEntry);
 		}
 	}
 	else {
-		if (!isEmpty(rt->getRightChildPtr())) {
+		if (isEmpty(rt->getRightChildPtr())) {
 			rt->setRightChildPtr(new BinaryNode<int>(newEntry));
-			return true;
+			//return true;
 		}
 		else {
 			_add(rt->getRightChildPtr(), newEntry);
 		}
 	}
+	return true;
 }
 
 void BinaryTree::printTree(BinaryNode<int>* cur) {
