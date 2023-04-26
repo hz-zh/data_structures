@@ -11,6 +11,8 @@ int main() {
 	myTree.add(20);
 	myTree.add(3);
 
+	std::cout << myTree.contains(3) << std::endl;
+
 	std::cout << "\nTree: ";
 	myTree.printTree(myTree.getRoot());
 
