@@ -11,9 +11,11 @@ BinaryNode<int>* RLRotate(BinaryNode<int>* rt);
 BinaryNode<int>* create_LR_imbalance(BinaryNode<int>*);
 BinaryNode<int>* LRRotate(BinaryNode<int>* rt);
 
+
 int main() {
 	BinaryNode<int>* root = nullptr;
 
+	/*
 	root = create_LL_imbalance(root);
 	std::cout << "\nPreorder: ";
 	printPreorder(root);
@@ -28,6 +30,24 @@ int main() {
 	printPreorder(root);
 	root = RRRotate(root);
 	std::cout << "\nPost RR Rotate: Preorder: ";
+	printPreorder(root);
+	*/
+	root = nullptr;
+
+	root = create_LR_imbalance(root);
+	std::cout << "\nPreorder: ";
+	printPreorder(root);
+	root = LRRotate(root);
+	std::cout << "\nPost LR Rotate: Preorder: ";
+	printPreorder(root);
+
+	root = nullptr;
+
+	root = create_RL_imbalance(root);
+	std::cout << "\nPreorder: ";
+	printPreorder(root);
+	root = RLRotate(root);
+	std::cout << "\nPost RL Rotate: Preorder: ";
 	printPreorder(root);
 
 	return 0;
@@ -70,7 +90,11 @@ BinaryNode<int>* create_RR_imbalance(BinaryNode<int>*) {
 */
 
 BinaryNode<int>* create_RL_imbalance(BinaryNode<int>*) {
-	return new BinaryNode<int>(10, nullptr, new BinaryNode<int>(20, nullptr, new BinaryNode<int>(30)));
+	return new BinaryNode<int>(10, nullptr, new BinaryNode<int>(30, new BinaryNode<int>(20), nullptr));
+}
+
+BinaryNode<int>* create_LR_imbalance(BinaryNode<int>*) {
+	return new BinaryNode<int>(30, new BinaryNode<int>(10, nullptr, new BinaryNode<int>(20)), nullptr);
 }
 
 
@@ -105,8 +129,30 @@ BinaryNode<int>* RRRotate(BinaryNode<int>* rt) {
 	return temp2;
 }
 
-BinaryNode<int>* RLRotate(BinaryNode<int>* rt) {
+BinaryNode<int>* LRRotate(BinaryNode<int>* rt) {
+	BinaryNode<int>* temp1 = rt; // hold ptr to root
+	BinaryNode<int>* temp2 = rt->getLeftChildPtr(); // hold ptr to node, left of root
+	BinaryNode<int>* temp3 = temp2->getRightChildPtr();
 
+	temp1->setLeftChildPtr(temp3->getRightChildPtr());
+	temp2->setRightChildPtr(temp3->getLeftChildPtr());
+	temp3->setLeftChildPtr(temp2);
+	temp3->setRightChildPtr(temp1);
+
+	return temp3;
+}
+
+BinaryNode<int>* RLRotate(BinaryNode<int>* rt) {
+	BinaryNode<int>* temp1 = rt; // hold ptr to root
+	BinaryNode<int>* temp2 = rt->getRightChildPtr(); // hold ptr to node, left of root
+	BinaryNode<int>* temp3 = temp2->getLeftChildPtr();
+
+	temp1->setRightChildPtr(temp3->getLeftChildPtr());
+	temp2->setLeftChildPtr(temp3->getRightChildPtr());
+	temp3->setRightChildPtr(temp2);
+	temp3->setLeftChildPtr(temp1);
+
+	return temp3;
 }
 
 
